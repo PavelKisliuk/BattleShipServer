@@ -40,7 +40,13 @@ public class Main {
 				ObjectInputStream input = new ObjectInputStream(player.getInputStream());
 
 				areaPlayer = (Area) input.readObject();
+				try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				output.writeObject(areaServer);
+				System.out.println(areaServer);
 
 				output.writeObject(Boolean.TRUE);
 
@@ -54,6 +60,11 @@ public class Main {
 					}
 
 					while(true) {
+						try {
+							Thread.sleep(1);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 						Random random = new SecureRandom();
 						List<Cell> boundList = scan(areaPlayer);
 						Cell randomCell = boundList.get(random.nextInt(boundList.size()));
